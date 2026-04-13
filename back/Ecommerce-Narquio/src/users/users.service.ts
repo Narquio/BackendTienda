@@ -6,8 +6,8 @@ export class UsersService {
  constructor(private readonly usersRepository:usersRepository) {}
   
 
-  getAllUsers():Omit<User, `password`>[] {
-    return this.usersRepository.getAllUsers();
+  getAllUsers(validPage:number, validLimit: number):Omit<User, `password`>[] {
+    return this.usersRepository.getAllUsers(validPage,validLimit);
   }
   getUserById(id:string){
   return this.usersRepository.getUserById(id);
@@ -16,4 +16,12 @@ export class UsersService {
   addUser(newUser: any){
     return this.usersRepository.addUser(newUser);
   }
+  updateUser(id: string, userNewData: any){
+    return this.usersRepository.updateUser(id, userNewData)
+  }
+
+  deleteUser (id: string){
+    return this.usersRepository.deleteUser(id);
+  }
+
 }

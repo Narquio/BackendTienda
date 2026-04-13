@@ -116,8 +116,12 @@ const users: User[] = [
 
 @Injectable()
 export class usersRepository {
-  getAllUsers(): Omit<User, `password`>[]{
-    return users.map(({password, ...userNoPassword})=>userNoPassword);
+  getAllUsers(validPage, validLimit): Omit<User, `password`>[]{
+
+    const start= (validPage-1)*validLimit;
+    const end=start+ validLimit;
+    const usersList= users.slice(start,end);
+    return usersList.map(({password, ...userNoPassword})=>userNoPassword);
   }
 
 
@@ -126,6 +130,10 @@ getUserById(id:string){
   if(!foundUser) return  `Usuario ${id} no encontrado`;
   const{ password, ...userNoPassword} = foundUser;
   return userNoPassword
+}
+
+getUserByEmail(email: string){
+  return users.find((user)=>user.email===email)
 }
 
 addUser(newUser: any){
@@ -138,5 +146,12 @@ updateUser(id: string, userNewData: any){
   const{ password, ...userNoPassword} = foundUser;
   Object.assign(foundUser, userNewData)
   return foundUser.id;
+}
+
+deleteUser(id:string){
+  const foundIndex= users.findIndex((users)=> users.id===id)
+   if(foundIndex===-1) return  `Usuario ${id} no encontrado`;
+   users.splice(foundIndex, 1);
+   return id;
 }
 }

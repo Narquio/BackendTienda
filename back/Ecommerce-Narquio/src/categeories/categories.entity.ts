@@ -7,13 +7,13 @@ import {
 import { Products } from '../products/products.entity';
 
 @Entity({ name: 'categories' })
-export class Category {
+export class Categories {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
-  @Column({ type: 'varchar', length: 50, nullable: false })
-  name: string;
+  @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
+  name!: string;
 
   @OneToMany(() => Products, (products) => products.category)
-  products: Products[];
+  products!: Products[];
 }

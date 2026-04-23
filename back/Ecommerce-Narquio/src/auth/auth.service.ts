@@ -11,10 +11,10 @@ export class AuthService {
       timestamp: new Date().toISOString(),
     };
   }
-  signIn (email:string, password: string){
+  async signIn (email:string, password: string){
     if (!email|| !password){ return `Email y contraseña son requeridos`;
  }
-   const foundUser = this.usersRepository.getUserByEmail(email);
+   const foundUser = await this.usersRepository.getUserByEmail(email);
    if (!foundUser) return `Email o password incorrectos`;
 
    if (foundUser.password !== password) return `Email o password incorrectos`;

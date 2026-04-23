@@ -8,6 +8,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { typeOrmConfig } from './config/typeorm';
+import { CategeoriesModule } from './categeories/categeories.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -17,7 +19,7 @@ import { typeOrmConfig } from './config/typeorm';
   , UsersModule, AuthModule, ProductsModule, TypeOrmModule.forRootAsync({
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => configService.get(`typeOrm`)!,
-    })
+    }), CategeoriesModule, OrdersModule
   ],
 
   controllers: [AppController],

@@ -7,20 +7,20 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Users } from '../users/users.entity';
-import { OrderDetail } from '../orders/orderDetail.entity';
+import { OrderDetail } from './ordersDetail.entity';
 
 @Entity({ name: 'orders' })
-export class Order {
+export class Orders{
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @ManyToOne(() => Users, (user) => user.orders)
-  user: User;
+  user!: Users;
 
   @Column({ type: 'date', nullable: true })
-  date: Date;
+  date!: Date;
 
   @OneToOne(() => OrderDetail, (orderDetail) => orderDetail.order)
   @JoinColumn()
-  orderDetail: OrderDetail;
+  orderDetail!: OrderDetail;
 }

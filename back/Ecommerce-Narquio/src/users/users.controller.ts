@@ -1,5 +1,4 @@
 import { Controller, Get, Post, Param, Body, Put, Delete, Query, UseGuards,  } from '@nestjs/common';
-import { User } from './users.repository';
 import { UsersService } from './users.service';
 import { AuthGuard } from '../auth/guards/auth.guard';
 
@@ -10,7 +9,7 @@ export class UsersController {
 
   @Get()
   @UseGuards(AuthGuard)
-  getAllUsers(@Query(`page`) page?: string,@Query(`limit`) limit?: string):Omit<User, `password`>[] {
+  getAllUsers(@Query(`page`) page?: string,@Query(`limit`) limit?: string):Promise<Omit<any, `password`>[] | string> {
     const pageNum=Number(page);
     const limitNum= Number(limit);
 

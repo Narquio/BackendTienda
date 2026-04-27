@@ -3,8 +3,9 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  
 } from 'typeorm';
-import { Order } from '../orders/orders.entity';
+import { Orders } from '../orders/orders.entity';
 
 @Entity({ name: 'users' })
 export class Users {
@@ -20,8 +21,8 @@ export class Users {
   @Column({ type: 'varchar', length: 20, nullable: false })
   password!: string;
 
-  @Column({ type: 'int', nullable: true })
-  phone!: number;
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  phone!: string;
 
   @Column({ type: 'varchar', length: 50, nullable: true })
   country!: string;
@@ -32,6 +33,9 @@ export class Users {
   @Column({ type: 'varchar', length: 50, nullable: true })
   city!: string;
 
-  @OneToMany(() => Order, (order) => order.user)
-  orders!: Order[];
+  @Column({ default: true })
+  isActive!: boolean;
+
+  @OneToMany(() => Orders, (orders) => orders.user)
+  orders!: Orders[];
 }

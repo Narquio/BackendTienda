@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';
 import { typeOrmConfig } from './config/typeorm';
 import { CategeoriesModule } from './categeories/categeories.module';
 import { OrdersModule } from './orders/orders.module';
+import { FileUploadModule } from './file-upload/file-upload.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -19,7 +20,7 @@ import { OrdersModule } from './orders/orders.module';
   , UsersModule, AuthModule, ProductsModule, TypeOrmModule.forRootAsync({
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => configService.get(`typeOrm`)!,
-    }), CategeoriesModule, OrdersModule
+    }), CategeoriesModule, OrdersModule, FileUploadModule
   ],
 
   controllers: [AppController],

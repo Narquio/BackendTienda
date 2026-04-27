@@ -5,6 +5,7 @@ import { OrderDetail } from "./ordersDetail.entity";
 import { Orders}from "./orders.entity";
 import { Users } from "../users/users.entity";
 import { Products } from "../products/products.entity";
+import { CreateOrdersDTO } from "./orders.DTO/createOrders.DTO";
 
 
 @Injectable()
@@ -40,7 +41,7 @@ export class OrdersRepository  {constructor
 
 }
 
-async addOrder(newOrderData: any): Promise<Orders[] | string> {
+async addOrder(newOrderData:CreateOrdersDTO): Promise<Orders[] | string> {
   const { userId, products } = newOrderData;
 
   const user = await this.ormUsersRepository.findOneBy({ id: userId });

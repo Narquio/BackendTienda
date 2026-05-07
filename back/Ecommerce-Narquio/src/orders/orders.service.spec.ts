@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrdersService } from './orders.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Orders } from './orders.entity';
-import { OrderDetails } from './orderDetails.entity';
+import { OrderDetail } from './ordersDetail.entity';
 import { Users } from '../users/users.entity';
 import { Products } from '../products/products.entity';
 import { NotFoundException } from '@nestjs/common';
@@ -36,7 +36,7 @@ describe('OrdersService – Unit Tests', () => {
       providers: [
         OrdersService,
         { provide: getRepositoryToken(Orders), useValue: mockOrdersRepo },
-        { provide: getRepositoryToken(OrderDetails), useValue: mockOrderDetailsRepo },
+        { provide: getRepositoryToken(OrderDetail), useValue: mockOrderDetailsRepo },
         { provide: getRepositoryToken(Users), useValue: mockUsersRepo },
         { provide: getRepositoryToken(Products), useValue: mockProductsRepo },
       ],

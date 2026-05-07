@@ -5,9 +5,10 @@ import { FileUploadRepository } from './file-upload.repository';
 import { ProductsModule } from '../products/products.module';
 import { Products } from '../products/products.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [ProductsModule, TypeOrmModule.forFeature([Products])],
+  imports: [ProductsModule,AuthModule, TypeOrmModule.forFeature([Products])],
   controllers: [FileUploadController],
   providers: [FileUploadService, FileUploadRepository],
 })

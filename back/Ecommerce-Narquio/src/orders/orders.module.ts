@@ -7,8 +7,9 @@ import { Orders } from './orders.entity';
 import { OrderDetail } from './ordersDetail.entity';
 import { Users } from '../users/users.entity';
 import { Products } from '../products/products.entity';
+import { AuthModule } from '../auth/auth.module';
 @Module({
-  imports:[TypeOrmModule.forFeature([Orders, OrderDetail, Users, Products])],
+  imports:[AuthModule, TypeOrmModule.forFeature([Orders, OrderDetail, Users, Products])],
   controllers: [OrdersController],
   providers: [OrdersService, OrdersRepository],
 })

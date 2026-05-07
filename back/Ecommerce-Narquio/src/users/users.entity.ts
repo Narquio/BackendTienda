@@ -18,7 +18,7 @@ export class Users {
   @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
   email!: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
+  @Column({ type: 'varchar', length: 60, nullable: false })
   password!: string;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
@@ -35,6 +35,9 @@ export class Users {
 
   @Column({ default: true })
   isActive!: boolean;
+
+  @Column({ default: false })
+  isAdmin!: boolean;
 
   @OneToMany(() => Orders, (orders) => orders.user)
   orders!: Orders[];

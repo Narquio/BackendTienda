@@ -1,24 +1,25 @@
 import { registerAs } from "@nestjs/config";
 import { config as dotenvConfig } from "dotenv";
 import { DataSource, DataSourceOptions } from "typeorm";
+import { environment } from "./environment";
 dotenvConfig({ path: "env.development" });
+
 
 const config = {
   type: "postgres",
-  database: process.env.DB_NAME,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT as unknown as number,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
+  database: environment.DB_NAME,
+  host: environment.DB_HOST,
+  port: Number (environment.DB_PORT), 
+  username: environment.DB_USERNAME,
+  password: environment.DB_PASSWORD,
   entities: ["dist/**/*.entity{.ts,.js}"],
   migrations: ["dist/migrations/*{.ts,.js}"],
   autoLoadEntities: true,
-  logging: true,
+  logging: false,
   synchronize: true,
-  dropSchema: true,
+  dropSchema: false,
 };
 
 export const typeOrmConfig = registerAs("typeorm", () => config);
-// La línea siguiente es necesaria para poder correr las migraciones
-// desde la terminal con el comando: npm run typeorm migration:run
+
 export const connectionSource = new DataSource(config as DataSourceOptions);

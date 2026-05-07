@@ -6,7 +6,7 @@ import { CreateUserDto } from './users.Dto/createUsers.Dto';
 import { UpdateUserDto } from './users.Dto/updateUsers.Dto';
 
 @Injectable()
-export class usersRepository {
+export class UsersRepository {
   constructor(
     @InjectRepository(Users)
     private ormUsersRepository: Repository<Users>,
@@ -15,7 +15,7 @@ export class usersRepository {
   async getAllUsers(page: number, limit: number): Promise<Omit<Users, 'password'>[]> {
     const skip = (page - 1) * limit;
     const allUsers = await this.ormUsersRepository.find({
-      where: { isActive: true }, // ← solo usuarios activos
+      where: { isActive: true }, 
       skip,
       take: limit,
     });
@@ -23,9 +23,9 @@ export class usersRepository {
     return allUsers.map(({ password, ...userNoPassword }) => userNoPassword);
   }
 
-  async getUserById(id: string): Promise<Omit<Users, 'password'>> {
+  async getUserById(id: string): Promise<Omit<Users, 'password'| `isAdmin`>> {
     const foundUser = await this.ormUsersRepository.findOne({
-      where: { id, isActive: true }, // ← verifica isActive
+      where: { id, isActive: true },
       relations: {
         orders: {
           orderDetail: {
@@ -41,16 +41,16 @@ export class usersRepository {
   }
 
   async getUserByEmail(email: string): Promise<Users | null> {
-    return await this.ormUsersRepository.findOneBy({ email, isActive: true }); // ← verifica isActive
+    return await this.ormUsersRepository.findOneBy({ email, isActive: true }); 
   }
 
   async addUser(newUserData: CreateUserDto): Promise<string> {
     const savedUser = await this.ormUsersRepository.save(newUserData);
-    return savedUser.id;
-  }
+    return `Usuario ${savedUser.name} registrado exitosamente`;}
+  
 
   async updateUser(id: string, newUserData: UpdateUserDto): Promise<Omit<Users, 'password'>> {
-    const user = await this.ormUsersRepository.findOneBy({ id, isActive: true }); // ← verifica isActive
+    const user = await this.ormUsersRepository.findOneBy({ id, isActive: true }); 
     if (!user) throw new NotFoundException(`Usuario ${id} no encontrado o inactivo`);
 
     const mergedUser = this.ormUsersRepository.merge(user, newUserData);
@@ -60,8 +60,8 @@ export class usersRepository {
   }
 
   async deleteUser(id: string): Promise<string> {
-    const user = await this.ormUsersRepository.findOneBy({ id, isActive: true }); // ← verifica isActive
-    if (!user) throw new NotFoundException(`Usuario con id ${id} no encontrado o ya inactivo`);
+    const user = await this.ormUsersRepository.findOneBy({ id, isActive: true }); 
+    if (!user) throw new NotFoundException(`Usuario con id ${id} no encontrado`);
 
     await this.ormUsersRepository.update(id, { isActive: false });
     return `Usuario con id ${id} desactivado correctamente`;

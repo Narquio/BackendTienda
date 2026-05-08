@@ -4,7 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Users } from './users.entity';
 import { NotFoundException } from '@nestjs/common';
 
-// ---------- Stubs ----------
+
 const mockUser = {
   id: 'user-uuid-1',
   name: 'Bob',
@@ -25,7 +25,7 @@ const mockUsersRepository = {
   delete: jest.fn(),
 };
 
-// ---------- Suite ----------
+
 describe('UsersService – Unit Tests', () => {
   let usersService: UsersService;
 
@@ -46,7 +46,7 @@ describe('UsersService – Unit Tests', () => {
 
   
 
-  //  getUserById
+  
   describe('getUserById()', () => {
     it('should return user without sensitive fields', async () => {
       mockUsersRepository.findOne.mockResolvedValue(mockUser);
@@ -58,7 +58,7 @@ describe('UsersService – Unit Tests', () => {
     });
   });
 
-  // ──updateUser
+  
   describe('updateUser()', () => {
     it('should save and return updated user id', async () => {
       mockUsersRepository.findOne.mockResolvedValue(mockUser);

@@ -1,10 +1,16 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { CanActivate,
+         ExecutionContext,
+         Injectable,
+         UnauthorizedException,
+        
+          } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 
 @Injectable()
-export class AuthGuard implements CanActivate { constructor(private readonly jwtService: JwtService) {}
+export class AuthGuard implements CanActivate { constructor(private readonly jwtService: JwtService, private readonly configService:ConfigService,) {}
 
   canActivate(
     context: ExecutionContext,
@@ -20,13 +26,12 @@ export class AuthGuard implements CanActivate { constructor(private readonly jwt
     
     const [type, token] = authHeader.split(` `);
     if (type !== `Bearer` || !token) { throw new UnauthorizedException(`Formato de token inválido`);}
-
-     try { const payload = this.jwtService.verify(token, { secret: process.env.JWT_SECRET });
-      request.user = payload; 
-    } catch (error: any) {
+      const secret = this.configService.get<string>(`JWT`)
+      const payload = this.jwtService.verify(token,{secret:secret})
+      request.user = payload
+      return true
+    } catch (error: any) {if (error.name===`tokenExpiredError`)
       throw new UnauthorizedException('Token inválido o expirado');
     }
-    
-    return true
   }
-}
+

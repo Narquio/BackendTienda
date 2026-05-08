@@ -12,6 +12,7 @@ async function bootstrap() {
     .setTitle('proyecto integrador M4 back')
     .setDescription('Aplicacion creada con nestJS')
     .setVersion('1.0.0')
+    .addBearerAuth()
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);

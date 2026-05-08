@@ -29,9 +29,9 @@ export class ProductsRepository{
   async addProducts(): Promise<string> {
   const categories = await this.ormCategoriesRepository.find();
 
-  await Promise.all(
-    allProducts.map(async (element) => {
-      const category = categories.find((cat) => cat.name === element.category);
+  
+    for (const element of allProducts) {
+    const category = categories.find((cat) => cat.name === element.category);
 
       if (!category) throw new Error(`Categoría ${element.category} no encontrada`);
 
@@ -49,8 +49,8 @@ export class ProductsRepository{
         .values(product)
         .orUpdate(['description', 'price', 'imgUrl', 'stock'], ['name'])
         .execute();
-    })
-  );
+    }
+  ;
   
   return "Productos agregados exitosamente";
 } 

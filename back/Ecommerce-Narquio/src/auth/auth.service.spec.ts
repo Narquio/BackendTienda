@@ -4,7 +4,11 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 
 
-
+// ---------- Mocks ----------
+const mockUsersService = {
+  findByEmail: jest.fn(),
+  addUser: jest.fn(),
+};
 
 const mockJwtService = {
   signAsync: jest.fn(),

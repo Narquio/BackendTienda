@@ -14,7 +14,7 @@ export class FileUploadController {
   @UseGuards(AuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   @ApiOperation({ summary: 'Subir imagen de un producto' })
-  @ApiConsumes('multipart/form-data')  // ← le dice a Swagger que es un upload
+  @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'Imagen del producto (jpg, jpeg, png — máx 200KB)',
     schema: {

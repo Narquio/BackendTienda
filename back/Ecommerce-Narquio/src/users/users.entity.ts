@@ -16,7 +16,7 @@ export class Users {
   @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
   email!: string;
 
-  @ApiHideProperty() // ← nunca exponer password en la documentación
+  @ApiHideProperty() 
   @Column({ type: 'varchar', length: 60, nullable: false })
   password!: string;
 
@@ -40,7 +40,7 @@ export class Users {
   @Column({ default: true })
   isActive!: boolean;
 
-  @ApiHideProperty() // ← oculto para no exponer roles en la documentación
+  @ApiHideProperty()
   @Column({ default: false })
   isAdmin!: boolean;
 

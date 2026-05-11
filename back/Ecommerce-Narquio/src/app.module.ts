@@ -11,8 +11,7 @@ import { typeOrmConfig } from './config/typeorm';
 import { CategoriesModule } from './categeories/categories.module';
 import { OrdersModule } from './orders/orders.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
-import { JwtModule } from '@nestjs/jwt';
-import { environment } from './config/environment';
+
 
 
 @Module({

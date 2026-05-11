@@ -50,7 +50,7 @@ export class CreateUserDto {
     @MaxLength(80, { message: 'La ciudad no debe exceder los 80 caracteres' })
     city!: string;
 
-    @ApiHideProperty()  // ← oculto en Swagger, no debe enviarse
+    @ApiHideProperty()  
     @IsEmpty()
     isAdmin!: boolean;
 }

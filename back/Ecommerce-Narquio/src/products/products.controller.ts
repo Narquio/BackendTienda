@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Delete, Param, Put, Query, UseGuards } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Products } from './products.entity';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Role } from '../customDecorators/role.decorator';

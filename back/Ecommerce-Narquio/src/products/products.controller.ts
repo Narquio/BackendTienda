@@ -5,7 +5,7 @@ import { AuthGuard } from '../auth/guards/auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Role } from '../customDecorators/role.decorator';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
-
+import { UpdateProductDto } from './products.DTO/updateProduct.dto';
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
@@ -44,8 +44,8 @@ export class ProductsController {
   @ApiResponse({ status: 200, description: 'Producto actualizado' })
   @ApiResponse({ status: 403, description: 'Acceso denegado — se requiere rol Admin' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado' })
-  updateProduct(@Param('id') id: string, @Body() productNewData: Products) {
-    return this.productsService.updateProduct(id, productNewData);
+  updateProduct(@Param('id') id: string, @Body() productNewData: UpdateProductDto) {
+  return this.productsService.updateProduct(id, productNewData);
   }
 
   @Delete(':id')

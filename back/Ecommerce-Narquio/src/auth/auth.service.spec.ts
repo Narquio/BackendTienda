@@ -4,7 +4,7 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 
 
-// ---------- Mocks ----------
+
 const mockUsersService = {
   findByEmail: jest.fn(),
   addUser: jest.fn(),
@@ -14,7 +14,7 @@ const mockJwtService = {
   signAsync: jest.fn(),
 };
 
-// ---------- Suite ----------
+
 describe('AuthService – Unit Tests', () => {
   let authService: AuthService;
 
@@ -33,7 +33,7 @@ describe('AuthService – Unit Tests', () => {
 
  
 
-  //  signUp 
+  
   describe('signUp()', () => {
     it('should hash the password and create a new user', async () => {
       const dto = {

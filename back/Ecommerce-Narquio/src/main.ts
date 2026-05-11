@@ -6,8 +6,10 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(new ValidationPipe());
-
+ app.useGlobalPipes(new ValidationPipe({
+  whitelist: true,
+  transform: true,
+}));
   const config = new DocumentBuilder()
     .setTitle('proyecto integrador M4 back')
     .setDescription('Aplicacion creada con nestJS')

@@ -12,7 +12,7 @@ export class Categories {
   @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
   name!: string;
 
-  @ApiHideProperty() // ← oculto para evitar referencias circulares
+  @ApiHideProperty() 
   @OneToMany(() => Products, (products) => products.category)
   products!: Products[];
 }

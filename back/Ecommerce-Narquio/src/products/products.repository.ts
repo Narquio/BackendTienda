@@ -66,6 +66,7 @@ async getProductById(id: string): Promise<Products| string> {
 
 
 async updateProduct(id: string, productNewData: Partial<Products>): Promise<Products | null> {
+  
   await this.ormProductsRepository.update(id, productNewData);
   const updatedProduct = await this.ormProductsRepository.findOneBy({ id });
   return updatedProduct;

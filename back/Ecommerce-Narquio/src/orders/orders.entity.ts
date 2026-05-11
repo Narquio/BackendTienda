@@ -19,6 +19,5 @@ export class Orders {
 
   @ApiHideProperty()
   @OneToOne(() => OrderDetail, (orderDetail) => orderDetail.order)
-  @JoinColumn()
-  orderDetail!: OrderDetail;
+ orderDetail!: OrderDetail;
 }

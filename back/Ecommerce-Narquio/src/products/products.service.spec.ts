@@ -4,7 +4,6 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Products } from './products.entity';
 
 
-// ---------- Stubs ----------
 const mockProduct = {
   id: 'prod-uuid-1',
   name: 'Laptop',
@@ -22,7 +21,7 @@ const mockProductsRepository = {
   delete: jest.fn(),
 };
 
-// ---------- Suite ----------
+
 describe('ProductsService – Unit Tests', () => {
   let productsService: ProductsService;
 
@@ -41,7 +40,7 @@ describe('ProductsService – Unit Tests', () => {
     jest.clearAllMocks();
   });
 
-  //  getAllProducts
+  
   describe('getAllProducts()', () => {
     it('should return a paginated list of products', async () => {
       mockProductsRepository.find.mockResolvedValue([mockProduct]);

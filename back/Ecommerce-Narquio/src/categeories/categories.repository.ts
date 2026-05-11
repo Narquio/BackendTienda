@@ -17,13 +17,13 @@ export class CategoriesRepository {
 
     async addCategories(): Promise<string> {
         const insertPromises = allProducts.map((element) =>
-             {this.ormCategoriesRepository
+             this.ormCategoriesRepository
                 .createQueryBuilder()
                 .insert()
                 .into(Categories)
                 .values({ name: element.category })
                 .orIgnore()
-                .execute()}
+                .execute()
         );
              await Promise.all(insertPromises); 
 

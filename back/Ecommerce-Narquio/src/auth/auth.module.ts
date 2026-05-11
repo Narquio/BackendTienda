@@ -5,12 +5,13 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersRepository } from '../users/users.repository';
 import { Users } from '../users/users.entity';
+import { environment } from '../config/environment';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Users]),
     JwtModule.register({         
-      secret: process.env.JWT_SECRET || 'secret',
+      secret: environment.JWT_SECRET || 'secret',
       signOptions: { expiresIn: '1d' },
     }),
   ],

@@ -10,7 +10,7 @@ export class Products {
   id!: string;
 
   @ApiProperty({ example: 'Laptop HP', description: 'Nombre del producto (máx 50 caracteres)' })
-  @Column({ type: 'varchar', length: 50, nullable: false })
+  @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
   name!: string;
 
   @ApiProperty({ example: 'Laptop HP con procesador Intel Core i7', description: 'Descripción del producto' })

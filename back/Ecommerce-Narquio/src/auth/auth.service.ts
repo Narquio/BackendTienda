@@ -3,6 +3,7 @@ import { UsersRepository } from '../users/users.repository';
 import { CreateUserDto } from '../users/users.Dto/createUsers.Dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { environment } from '../config/environment';
 
 
 
@@ -33,9 +34,9 @@ export class AuthService {
 
 
   async signIn (email:string, password: string){
-
-  const foundUser = await this.usersRepository.getUserByEmail(email);
+const foundUser = await this.usersRepository.getUserByEmail(email);
    if (!foundUser) { throw new BadRequestException(`Email o contraseña incorrectos`);
+    ;
    }
    
    const validPassword = await bcrypt.compare(password, foundUser.password);

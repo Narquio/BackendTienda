@@ -10,13 +10,15 @@ export class RolesGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request =context.switchToHttp().getRequest();
-    const userRole = request.user.role
+    const userRole = request.user.roles
+    
 
-    const routeRole= this.reflector.getAllAndOverride<string>(`Role`,
+    const routeRole= this.reflector.getAllAndOverride<string>(`role`,
     [context.getHandler(),
       context.getClass(),
     ]);
-   if (routeRole!== userRole){throw new ForbiddenException}(`No tiene permiso para acceder a esta ruta`)
+    
+   if (routeRole !== userRole) { throw new ForbiddenException(`No tiene permiso para acceder a esta ruta`); }
     return true;
   }
 }

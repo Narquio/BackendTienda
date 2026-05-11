@@ -3,7 +3,7 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class UpdateUserDto {
     @ApiProperty({ example: 'Juan Pérez', description: 'Nombre completo (3-80 caracteres)' })
-    @IsNotEmpty({ message: 'El nombre es obligatorio' })
+    @IsOptional()
     @IsString({ message: 'El nombre debe ser una cadena de texto' })
     @MinLength(3, { message: 'El nombre debe tener al menos 3 caracteres' })
     @MaxLength(80, { message: 'El nombre no debe exceder los 80 caracteres' })
@@ -15,14 +15,14 @@ export class UpdateUserDto {
     email?: string;
 
     @ApiProperty({ example: 'Password1!', description: 'Mínimo 8 caracteres, máximo 15, con mayúscula, minúscula, número y símbolo' })
-    @IsNotEmpty({ message: 'La contraseña es obligatoria' })
+    @IsOptional()
     @IsString({ message: 'La contraseña debe ser una cadena de texto' })
     @IsStrongPassword({ minLength: 8, minUppercase: 1, minLowercase: 1, minNumbers: 1, minSymbols: 1 }, { message: 'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y un simbolo' })
     @MaxLength(15, { message: 'La contraseña no debe exceder los 15 caracteres' })
     password!: string;
 
     @ApiProperty({ example: 1234567890, description: 'Número de teléfono' })
-    @IsNotEmpty({ message: 'El número de teléfono es obligatorio' })
+   @IsOptional()
     @IsNumber({}, { message: 'El número de teléfono debe ser un número' })
     phone!: string;
 

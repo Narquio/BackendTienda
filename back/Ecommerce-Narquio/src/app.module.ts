@@ -8,7 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { typeOrmConfig } from './config/typeorm';
-import { CategeoriesModule } from './categeories/categeories.module';
+import { CategoriesModule } from './categeories/categories.module';
 import { OrdersModule } from './orders/orders.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { JwtModule } from '@nestjs/jwt';
@@ -24,11 +24,7 @@ import { environment } from './config/environment';
   , UsersModule, AuthModule, ProductsModule, TypeOrmModule.forRootAsync({
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => configService.get(`typeOrm`)!,
-    }), CategeoriesModule, OrdersModule, FileUploadModule, JwtModule.register({
-      secret: environment.JWT_SECRET,
-      signOptions: { expiresIn: '1h' }
-    })
-  ],
+    }), CategoriesModule, OrdersModule, FileUploadModule],
 
   controllers: [AppController],
   providers: [AppService],
